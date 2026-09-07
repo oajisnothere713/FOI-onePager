@@ -209,11 +209,12 @@ body{
 
 /* ============ FOUNDER ============ */
 .section-founder{background:var(--dark);color:#fff;border-bottom:none}
-.founder-wrap{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:start;margin-top:26px}
-.founder-badge{width:130px;flex-shrink:0;text-align:center}
-.founder-avatar{width:110px;height:110px;border-radius:20px;margin:0 auto 12px;
-  overflow:hidden;box-shadow:0 8px 30px rgba(232,89,12,.4)}
-.founder-avatar img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.founder-wrap{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:start;margin-top:26px}
+.founder-badge{width:180px;flex-shrink:0;text-align:center}
+.founder-avatar{width:180px;height:180px;border-radius:22px;margin:0 auto 14px;
+  overflow:hidden;box-shadow:0 8px 30px rgba(232,89,12,.4);cursor:pointer;transition:transform .2s}
+.founder-avatar:hover{transform:scale(1.04)}
+.founder-avatar img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
 .founder-name{font-size:15px;font-weight:700;color:#fff}
 .founder-title{font-size:11px;color:var(--mu);line-height:1.4;margin-top:2px}
 .section-founder .sec-title{color:#fff}
@@ -222,6 +223,16 @@ body{
 .founder-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
 .founder-tag{font-size:11.5px;font-weight:600;padding:6px 13px;border-radius:100px;
   background:rgba(232,89,12,.14);border:1px solid rgba(232,89,12,.3);color:#FFD4B8}
+
+/* ============ LIGHTBOX ============ */
+.lightbox{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);
+  align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(6px)}
+.lightbox.active{display:flex}
+.lightbox img{max-width:90vw;max-height:90vh;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.6);object-fit:contain}
+.lightbox-close{position:absolute;top:24px;right:32px;color:#fff;font-size:32px;font-weight:700;
+  cursor:pointer;width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.1);border-radius:50%;border:none;transition:background .2s}
+.lightbox-close:hover{background:rgba(255,255,255,.25)}
 @media (max-width:780px){
   .persona-grid{grid-template-columns:1fr}
   .founder-wrap{grid-template-columns:1fr}
@@ -504,7 +515,7 @@ body{
     <div class="sec-title">The founder stood in the pit.</div>
     <div class="founder-wrap">
       <div class="founder-badge">
-        <div class="founder-avatar"><img src="founder-photo.jpg" alt="Prashant Agarwal"></div>
+        <div class="founder-avatar" onclick="document.getElementById('lightbox').classList.add('active')"><img src="founder-photo.jpg" alt="Prashant Agarwal"></div>
         <div class="founder-name">Prashant Agarwal</div>
         <div class="founder-title">Founder &amp; Principal Architect<br>Thread &amp; Core Systems</div>
       </div>
@@ -574,5 +585,14 @@ body{
   </div>
 
 </div>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('active')">
+  <button class="lightbox-close" aria-label="Close">&times;</button>
+  <img src="founder-photo.jpg" alt="Prashant Agarwal — Founder">
+</div>
+<script>
+document.addEventListener('keydown',function(e){if(e.key==='Escape')document.getElementById('lightbox').classList.remove('active')});
+</script>
 </body>
 </html>
